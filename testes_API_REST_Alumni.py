@@ -6,8 +6,6 @@ import jsonpath
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
-        self.url = 'http://127.0.0.1:3000/alumni/19180041'
-
         self.InitToken()
 
     def InitToken(self):
@@ -37,9 +35,9 @@ class MyTestCase(unittest.TestCase):
                             'user-type': userType[0]
                             }
 
-    def test_getAlumniByNumeroEstudante(self):
+    def test_getAlumniByNumeroEstudanteAuthOk(self):
         # testar route get alumni by numero de estudante
-        response = requests.get(self.url, headers = self.authHeaders)
+        response = requests.get('http://127.0.0.1:3000/alumni/19180041', headers = self.authHeaders)
 
         # analisar e processar os dados
         json_response = json.loads(response.text)
@@ -57,6 +55,16 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual('Sou uma developer.',data['descricao'])
         self.assertEqual(3, data['id_role'])
         self.assertEqual(2, data['id_genero'])
+
+    def test_getAllAlumniAuthOk(self):
+        # testar route get alumni by numero de estudante
+        response = requests.get('http://127.0.0.1:3000/alumni/', headers = self.authHeaders)
+        self.assertEqual(response.status_code, 200)
+
+    def test_getAllAlumniAuthNok(self):
+        # testar route get alumni by numero de estudante
+        response = requests.get('http://127.0.0.1:3000/alumni/')
+        self.assertEqual(response.status_code, 403)
 
 if __name__ == '__main__':
     unittest.main()
