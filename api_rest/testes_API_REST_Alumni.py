@@ -37,7 +37,7 @@ class MyTestCase(unittest.TestCase):
 
     def test_getAlumniByNumeroEstudanteAuthOk(self):
         # testar route get alumni by numero de estudante
-        response = requests.get('http://127.0.0.1:3000/alumni/19180041', headers = self.authHeaders)
+        response = requests.get('http://127.0.0.1:3000/alumni/19180047', headers = self.authHeaders)
 
         # analisar e processar os dados
         json_response = json.loads(response.text)
@@ -46,15 +46,15 @@ class MyTestCase(unittest.TestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(json_response), 1)
-        self.assertEqual(19180041, data['id_nroEstudante'])
-        self.assertEqual('Andrea Isabel Freita', data['nome'])
-        self.assertEqual('03/06/2021', data['dataNascimento'])
-        self.assertEqual('Rua das Loucas', data['morada'])
-        self.assertEqual('andreaisabelfreitas@gmail.com', data['email'])
-        self.assertEqual('917574444', data['telemovel'])
-        self.assertEqual('Sou uma developer.',data['descricao'])
+        self.assertEqual(19180047, data['id_nroEstudante'])
+        self.assertEqual('Antonio Hernandes', data['nome'])
+        self.assertEqual('18/04/2000', data['dataNascimento'])
+        self.assertEqual('Rua das Batatas', data['morada'])
+        self.assertEqual('antonio@gmail.com', data['email'])
+        self.assertEqual('914564845', data['telemovel'])
+        self.assertEqual('Sou o Antonio',data['descricao'])
         self.assertEqual(3, data['id_role'])
-        self.assertEqual(2, data['id_genero'])
+        self.assertEqual(1, data['id_genero'])
 
     def test_getAllAlumniAuthOk(self):
         # testar route get alumni by numero de estudante
